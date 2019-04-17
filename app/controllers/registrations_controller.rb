@@ -4,12 +4,12 @@ class RegistrationsController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to log_in_path, notice: 'User was successfully created.' }
-      else
-        format.html { redirect_to sign_in_path, notice: 'Error'}
-      end
+    if @user.save
+      flash[:notice] = "Success"
+      redirect_to log_in_path
+    else
+      flash[:notice] = "Error"
+      redirect_to sign_in_path
     end
   end
 

@@ -25,7 +25,14 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    #complete this method
+    @user = User.new(user_params)
+    if @user.save
+      flash[:notice] = "Success"
+      redirect_to log_in_path
+    else
+      flash[:notice] = "Error"
+      redirect_to sign_in_path
+    end
   end
 
   # PATCH/PUT /users/1
